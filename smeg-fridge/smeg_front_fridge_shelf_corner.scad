@@ -24,21 +24,63 @@ frontpart_width = 20;
 sidepart_internal_width = sidepart_width - sidepart_external_width;
 
 total_thickness = gap_thickness + 2 * wall_thickness;
+padding_thickness = total_thickness;
+padding_length = sidepart_width * 1.5;
+padding_width = frontpart_width / 2;
+padding_radius = 2;
+
 
 rotate(a = 90, v = [0, -1, 0]) {
-  difference() {
 
-    // Draw two cubes together
+    difference() {
 
-    union() {
-      cube([length, frontpart_width, total_thickness]);
-      cube([sidepart_width, length, total_thickness]);
+      // Draw two cubes together
+
+      union() {
+        cube([length, frontpart_width, total_thickness]);
+        cube([sidepart_width, length, total_thickness]);
+
+        translate([(frontpart_width-padding_width)/3, sidepart_width - (padding_length/2), (-padding_thickness / 2) + (total_thickness/2)]) {
+          hull() {
+            translate([0, 0, 0]) {
+              sphere(padding_radius);
+            }
+
+            translate([padding_length, 0, 0]) {
+              sphere(padding_radius);
+            }
+
+            translate([padding_length, padding_width, 0]) {
+              sphere(padding_radius);
+            }
+
+            translate([0, padding_width, 0]) {
+              sphere(padding_radius);
+            }
+
+            translate([0, 0, padding_thickness]) {
+              sphere(padding_radius);
+            }
+
+            translate([padding_length, 0, padding_thickness]) {
+              sphere(padding_radius);
+            }
+
+            translate([padding_length, padding_width, padding_thickness]) {
+              sphere(padding_radius);
+            }
+
+            translate([0, padding_width, padding_thickness]) {
+              sphere(padding_radius);
+            }
+          }
+        }
+      }
+
+      // Remove the inside form both of them
+
+      translate([sidepart_internal_width, wall_thickness, wall_thickness]) {
+        cube([length, length, gap_thickness]);
+      }
     }
-
-    // Remove the inside form both of them
-
-    translate([sidepart_internal_width, wall_thickness, wall_thickness]) {
-      cube([length, length, gap_thickness]);
-    }
-  }
 }
