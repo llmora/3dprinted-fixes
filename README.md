@@ -11,4 +11,6 @@ replace some of those hard-to-find components in an effort to extend the working
 life of equipment around us, I hope these are as useful to you as they have been
 for us.
 
+  * card-box: recipe box hinges
+  * nikko-hawg: NIKKO Hawg 1/10 rc car steering piece
   * smeg_fridge: SMEG fridge shelf corners
