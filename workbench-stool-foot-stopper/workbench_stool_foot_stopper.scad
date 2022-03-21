@@ -27,7 +27,7 @@ module attachment() {
     difference() {
     cube([stopper_height, stopper_height, stopper_thickness]);
 
-    translate([stopper_height/2, stopper_height / 2, stopper_thickness * 2]) {
+    translate([stopper_height - stopper_thickness, stopper_height / 2, stopper_thickness * 2]) {
       hole_through(df[_NB_F_DESC], l=ds[_NB_S_LENGTH], h=df[_NB_F_HEAD_HEIGHT]);
     };
 
@@ -57,7 +57,7 @@ union() {
 
   difference() {
 
-    sector(stopper_height,stool_post_diameter + stopper_thickness, 0, 120);
+    sector(stopper_height,stool_post_diameter + stopper_thickness * 2, 0, 120);
 
     translate([0, 0, -stopper_height / 2]) {
       sector(stopper_height * 2, stool_post_diameter, -10, 130);
